@@ -89,7 +89,7 @@
         &.zero {
           width: 25*2%;
         }
-        $bg: #ffa115;
+        $bg: #ffb13d;
         &:nth-child(1) {
           background: lighten($bg, 4*6%);
         }

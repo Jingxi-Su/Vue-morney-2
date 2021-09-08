@@ -41,7 +41,7 @@
       align-items: center;
       position: relative;
       &.selected{
-        background: #ffa115;
+        background: #ffb13d;
       }
     }
   }
