@@ -22,29 +22,29 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
 
   @Component
   export default class NumberPad extends Vue {
-    output: string = '0';
+    output: string = '0';//因为后面有输入，ts会猜到类型为string，所以这里也可以不加：string
 
     inputContent(event: MouseEvent) {
       const button = (event.target as HTMLButtonElement);
-      const input = button.textContent!;
-      if (this.output.length === 16) { return; }
+      const input = button.textContent!;//！相当于as string，即把null排除
+      if (this.output.length === 16) { return; }//输入最高为16位
       if (this.output === '0') {
-        if ('0123456789'.indexOf(input) >= 0) {
+        if ('0123456789'.indexOf(input) >= 0) {//如果输入的东西在0123456789中
           this.output = input;
         } else {
           this.output += input;
         }
         return;
       }
-      if (this.output.indexOf('.') >= 0 && input === '.') {return;}
+      if (this.output.indexOf('.') >= 0 && input === '.') {return;}//防止一串数字中出现两个小数点
       this.output += input;
     }
 
-    remove() {
+    remove() {//删除
       if (this.output.length === 1) {
         this.output = '0';
       } else {
@@ -52,7 +52,7 @@
       }
     }
 
-    clear() {
+    clear() {//清空
       this.output = '0';
     }
 
