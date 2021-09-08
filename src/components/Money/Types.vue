@@ -3,6 +3,7 @@
     <ul class="types">
       <li :class="type === '-' && 'selected'"
           @click="selectType('-')">支出
+<!--          如果type === '-'，则class等于selected-->
       </li>
       <li :class="type === '+' && 'selected'"
           @click="selectType('+')">收入
@@ -13,9 +14,9 @@
 
 <script lang="ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
 
-  @Component
+  @Component//修饰器的作用：type会自动被处理成data，selectType会自动被处理成methods
   export default class Types extends Vue {
     type = '-'; // '-'表示支出，'+'表示收入
     selectType(type: string) {
