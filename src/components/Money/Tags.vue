@@ -56,7 +56,7 @@
       flex-wrap: wrap;
       > li {
         $bg: #ffb13d;
-        background: #d9d9d9;
+        background: #fde3cc;
         $h: 24px;
         height: $h;
         line-height: $h;
