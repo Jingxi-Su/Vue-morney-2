@@ -25,7 +25,7 @@
     toggle(tag: string) {
       const index = this.selectedTags.indexOf(tag);
       if (index >= 0) {
-        this.selectedTags.splice(index, 1);
+        this.selectedTags.splice(index, 1);//如果点击时已经选中，那么就要取消当前选中
       } else {
         this.selectedTags.push(tag);
       }
