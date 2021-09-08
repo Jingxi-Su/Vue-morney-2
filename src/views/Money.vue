@@ -8,26 +8,26 @@
 </template>
 
 <script>
-  import NumberPad from '@/components/Money/NumberPad.vue'
-  import Types from '@/components/Money/Types.vue'
-  import Notes from '@/components/Money/Notes.vue'
-  import Tags from '@/components/Money/Tags.vue'
+import NumberPad from '@/components/Money/NumberPad.vue'
+import Types from '@/components/Money/Types.vue'
+import Notes from '@/components/Money/Notes.vue'
+import Tags from '@/components/Money/Tags.vue'
 
-  export default {
-    name: 'Money',
-    components: {Tags, Notes, Types, NumberPad},
-    data() {
-      return {
-        tags: ['衣', '食', '住', '行', '彩票']
-      }
+export default {
+  name: 'Money',
+  components: {Tags, Notes, Types, NumberPad},
+  data() {
+    return {
+      tags: ['衣服', '吃饭', '交通', '水电', '房租', '彩妆']
     }
   }
+}
 </script>
 
 <style lang="scss">
-  .layout-content {
-    display: flex;
-    flex-direction: column-reverse;
-  }
+.layout-content {
+  display: flex;
+  flex-direction: column-reverse;
+}
 </style>
 

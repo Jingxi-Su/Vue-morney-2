@@ -55,8 +55,8 @@
       display: flex;
       flex-wrap: wrap;
       > li {
-        $bg: #d9d9d9;
-        background: $bg;
+        $bg: #ffa115;
+        background: #d9d9d9;
         $h: 24px;
         height: $h;
         line-height: $h;
@@ -65,8 +65,7 @@
         margin-right: 12px;
         margin-top: 4px;
         &.selected {
-          background: darken($bg, 50%);
-          color: white;
+          background: $bg;
         }
       }
     }
