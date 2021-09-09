@@ -16,12 +16,16 @@ import Types from '@/components/Money/Types.vue';
 import Notes from '@/components/Money/Notes.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component, Watch} from 'vue-property-decorator';
+import recordListModel from '@/models/recordListModel';
 
-type Record = {
+const recordList = recordListModel.fetch();
+
+type RecordItem = {
   tags: string[],
   notes: string,
   type: string,
-  amount: number
+  amount: number,//数据类型
+  createdAt?: Date//类or构造函数
 }
 
 @Component({
@@ -29,8 +33,8 @@ type Record = {
 })
 export default class Money extends Vue {
   tags = ['衣服', '吃饭', '交通', '水电', '房租', '彩妆'];
-  recordList: Record[] = [];
-  record: Record = {
+  recordList: RecordItem[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+  record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
 
@@ -42,23 +46,19 @@ export default class Money extends Vue {
     this.record.notes = value;
   }
 
-  // onUpdateType(value: string) {
-  //   this.record.type = value;
-  // }
-
   onUpdateAmount(value: string) {
     this.record.amount = parseFloat(value);
   }
 
   saveRecord() {
-    const record2 = JSON.parse(JSON.stringify(this.record));//深拷贝保存副本，防止之前的记录被覆盖
+    const record2: RecordItem = recordListModel.clone(this.record);
+    record2.createdAt = new Date();
     this.recordList.push(record2);
-    console.log(this.recordList);
   }
 
   @Watch('recordList')
   onRecordListChange() {
-    window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
+    recordListModel.save(this.recordList);
   }
 }
 </script>
