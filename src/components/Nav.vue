@@ -27,6 +27,7 @@
   nav {
     @extend %outerShadow;
     display: flex;
+    background: white;
     flex-direction: row;
     font-size: 12px;
     > .item {
