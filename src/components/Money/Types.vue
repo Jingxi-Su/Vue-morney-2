@@ -14,21 +14,17 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component, Watch} from 'vue-property-decorator';
+import {Component, Watch, Prop} from 'vue-property-decorator';
 
 @Component//修饰器的作用：type会自动被处理成data，selectType会自动被处理成methods
 export default class Types extends Vue {
-  type = '-'; // '-'表示支出，'+'表示收入
+  // '-'表示支出，'+'表示收入
+  @Prop() readonly value!:string;
   selectType(type: string) {
     if (type !== '-' && type !== '+') {
       throw new Error('type is unknown');
     }
-    this.type = type;
-  }
-
-  @Watch('type')
-  onTypeChanged(value: string) {
-    this.$emit('update:value', value);
+    this.$emit('update:value',type)
   }
 }
 </script>
