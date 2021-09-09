@@ -4,7 +4,12 @@
     <Types :value.sync="record.type"/>
     <!--    如果想给一个组件初始值，然后在更新时拿到最新的值，就使用.sync-->
     <!--    <Types :value="record.type" @update:value="onUpdateType"/>-->
-    <Notes @update:value="onUpdateNotes"/>
+    <div class="notes">
+      <FormItem field-name="备注"
+                placeholder="请在这里输入备注"
+                @update:value="onUpdateNotes"
+      />
+    </div>
     <Tags :data-source.sync="tags" @update:value="onUpdateTags"/>
   </Layout>
 </template>
@@ -13,27 +18,21 @@
 import Vue from 'vue';
 import NumberPad from '@/components/Money/NumberPad.vue';
 import Types from '@/components/Money/Types.vue';
-import Notes from '@/components/Money/Notes.vue';
+import FormItem from '@/components/Money/FormItem.vue';
 import Tags from '@/components/Money/Tags.vue';
 import {Component, Watch} from 'vue-property-decorator';
 import recordListModel from '@/models/recordListModel';
+import tagListModel from '@/models/tagListModel';
 
 const recordList = recordListModel.fetch();
-
-type RecordItem = {
-  tags: string[],
-  notes: string,
-  type: string,
-  amount: number,//数据类型
-  createdAt?: Date//类or构造函数
-}
+const tagList = tagListModel.fetch();
 
 @Component({
-  components: {Tags, Notes, Types, NumberPad}
+  components: {Tags, FormItem, Types, NumberPad}
 })
 export default class Money extends Vue {
-  tags = ['衣服', '吃饭', '交通', '水电', '房租', '彩妆'];
-  recordList: RecordItem[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+  tags = tagList;
+  recordList: RecordItem[] = recordList;
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
