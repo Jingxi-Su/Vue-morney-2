@@ -24,17 +24,15 @@ import {Component} from 'vue-property-decorator';
 
 @Component({
   components: {Tags, FormItem, Types, NumberPad},
-  computed: {//computed会自动计算依赖，依赖变化值也变化
-    recordList() {
-      return this.$store.state.recordList;//地址recordList复制到recordList
-    }
-  }
 })
 export default class Money extends Vue {
 
   record: RecordItem = {
     tags: [], notes: '', type: '-', amount: 0
   };
+  get recordList() {
+    return this.$store.state.recordList;//地址recordList复制到recordList
+  }
 
   created() {//初始化
     this.$store.commit('fetchRecords');
